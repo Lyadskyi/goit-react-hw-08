@@ -1,10 +1,23 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./components/AppBar/AppBar";
+import React from "react";
+import App from "./App.jsx";
+import { HelmetProvider } from "react-helmet-async";
+import { Provider } from "react-redux";
+import { store, persistor } from "./redux/store.js";
+import { PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <HelmetProvider>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>
 );
