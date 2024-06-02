@@ -1,9 +1,23 @@
-import css from "./AppBar.module.css";
+import { useSelector } from "react-redux";
+import { selectUserIsSignedIn } from "../../redux/auth/selectors.js";
+import Navigation from "../Navigation/Navigation.jsx";
+import AuthNav from "../AuthNav/AuthNav.jsx";
 
-export default function AppBar() {
+const AppBar = () => {
+  const isSignedIn = useSelector(selectUserIsSignedIn);
   return (
-    <div className={css.container}>
-      <h1>goit-react-hw-08</h1>
-    </div>
+    <>
+      {isSignedIn ? (
+        <>
+          <Navigation />
+        </>
+      ) : (
+        <>
+          <AuthNav />
+        </>
+      )}
+    </>
   );
-}
+};
+
+export default AppBar;
